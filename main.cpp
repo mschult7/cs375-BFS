@@ -24,7 +24,7 @@ public:
 };
 
 vector<pair<int,int> > BFS_list(vector<vector<int> >, vector<Node* >, int);
-vector<pair<int,int> > BFS_mat(int[][], vector<Node* >, int);
+vector<pair<int,int> > BFS_mat(vector<vector<int> >, vector<Node* >, int);
 
 int main(int argc, char* argv[]){
   int directed = -1; //directed = 1, undirected = 0
@@ -46,8 +46,11 @@ int main(int argc, char* argv[]){
   vector<vector<int> > adjList; adjList.resize(numOfNodes);
   vector<Node *> nodes; nodes.resize(numOfNodes);
 
-  int matrix[numOfNodes][numOfNodes];
+  vector<vector<int> > matrix; matrix.resize(numOfNodes);
 
+  for(int i=0; i<matrix.size(); i++){
+	  matrix[i].resize(numOfNodes);
+  }
 
   for(int i=0; i<nodes.size(); i++){
     nodes[i] = new Node();
@@ -160,7 +163,7 @@ cout << "---------------------------------------------" << endl;
 
 }
 
-vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
+vector<pair<int,int> > BFS_mat(vector<vector<int> > matrix, vector<Node*> nodes, int start){
   for(Node * u: nodes){
     u->color = 0;//white
     u->distance = -1;//infinity
