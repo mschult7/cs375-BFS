@@ -44,6 +44,10 @@ int main(int argc, char* argv[]){
 
 	vector<vector<int> > adjList; adjList.resize(numOfNodes);
 	vector<Node *> nodes; nodes.resize(numOfNodes);
+	
+	int[numOfNodes][numOfNodes] matrix;
+	
+	
 	for(int i=0; i<nodes.size(); i++){
 		nodes[i] = new Node();
 	}
@@ -55,6 +59,8 @@ int main(int argc, char* argv[]){
 		vector<int>::iterator indexFound;
 
 		if(directed==1){
+			matrix[firstNode][secondNode] = 1;
+			
 			if(adjList[firstNode].size()==0){
 				adjList[firstNode].push_back(secondNode);
 			}else{
@@ -65,6 +71,9 @@ int main(int argc, char* argv[]){
 				}
 			}
 		}else{
+			matrix[firstNode][secondNode] = 1;
+			matrix[secondNode][firstNode] = 1;
+			
 			if(adjList[firstNode].size()==0){
 				adjList[firstNode].push_back(secondNode);
 			}else{
