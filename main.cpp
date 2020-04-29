@@ -97,7 +97,12 @@ int main(int argc, char* argv[]){
   for(int i=0; i<nodes.size(); i++){
     cout << "Node: " << i << endl;
     cout << "distance: " << nodes[i]->distance << endl;
-    cout << "parent: " << nodes[i]->parent->index << endl;
+    if(nodes[i]->parent != NULL){
+      cout << "parent: " << nodes[i]->parent->index << endl;
+    } else {
+      cout << "parent: NULL //This is the start Node" << endl;
+    }
+
     cout << "edges: " << endl;
     for(int j=0; j<BFSTree.size(); j++){
       if(BFSTree[j].first == i ){
