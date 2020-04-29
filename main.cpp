@@ -45,7 +45,7 @@ int main(int argc, char* argv[]){
 	while(getline(infile, line)){
 		stringstream s3(line);
 		s3 >> firstNode >> secondNode;
-		
+
 		vector<int>::iterator indexFound;
 
 		if(directed==1){
@@ -53,7 +53,7 @@ int main(int argc, char* argv[]){
 				adjList[firstNode].push_back(secondNode);
 			}else{
 				indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
-				
+
 				if(indexFound==adjList[firstNode].end()){
 					adjList[firstNode].push_back(secondNode);
 				}
@@ -63,30 +63,31 @@ int main(int argc, char* argv[]){
 				adjList[firstNode].push_back(secondNode);
 			}else{
 				indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
-				
+
 				if(indexFound==adjList[firstNode].end()){
 					adjList[firstNode].push_back(secondNode);
 				}
 			}
-			
+
 			if(adjList[secondNode].size()==0){
 				adjList[secondNode].push_back(firstNode);
 			}else{
 				indexFound = find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
-			
+
 				if(indexFound==adjList[secondNode].end()){
 					adjList[secondNode].push_back(firstNode);
 				}
 			}
 		}
 	}
-	
+
 	/*for(int i=0; i<adjList.size(); i++){
 		cout << "Node: " << i << endl;
 		for(int j=0; j<adjList[i].size(); j++){
 			cout << adjList[i][j] << endl;
 		}
 	}*/
+  BFS_list(adjList,nodes,1);
 }
 
 vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
