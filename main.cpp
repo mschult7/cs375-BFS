@@ -9,166 +9,195 @@
 using namespace std;
 
 class Node{
-	public:
-		int index;
-		int color; //0 = white, 1 = grey, 2 = black
-		int distance;
-		Node * parent;
+public:
+  int index;
+  int color; //0 = white, 1 = grey, 2 = black
+  int distance;
+  Node * parent;
 
-		Node(){
-			index = -1;
-			color = 0;
-			distance = -1;
-			parent = NULL;
-		}
+  Node(){
+    index = -1;
+    color = 0;
+    distance = -1;
+    parent = NULL;
+  }
 };
 
 vector<pair<int,int> > BFS_list(vector<vector<int> >, vector<Node* >, int);
 
 int main(int argc, char* argv[]){
-	int directed = -1; //directed = 1, undirected = 0
-    int numOfNodes = -1, numOfEdges = -1;
+  int directed = -1; //directed = 1, undirected = 0
+  int numOfNodes = -1, numOfEdges = -1;
 
-	int firstNode = -1, secondNode = -1;
-	string line;
+  int firstNode = -1, secondNode = -1;
+  string line;
 
-	ifstream infile(argv[1]);
+  ifstream infile(argv[1]);
 
-	getline(infile, line);
-	stringstream s1(line);
-	s1 >> directed;
+  getline(infile, line);
+  stringstream s1(line);
+  s1 >> directed;
 
-	getline(infile, line);
-	stringstream s2(line);
-	s2 >> numOfNodes >> numOfEdges;
+  getline(infile, line);
+  stringstream s2(line);
+  s2 >> numOfNodes >> numOfEdges;
 
-	vector<vector<int> > adjList; adjList.resize(numOfNodes);
-	vector<Node *> nodes; nodes.resize(numOfNodes);
-	
-	int[numOfNodes][numOfNodes] matrix;
-	
-	
-	for(int i=0; i<nodes.size(); i++){
-		nodes[i] = new Node();
-	}
+  vector<vector<int> > adjList; adjList.resize(numOfNodes);
+  vector<Node *> nodes; nodes.resize(numOfNodes);
 
-	while(getline(infile, line)){
-		stringstream s3(line);
-		s3 >> firstNode >> secondNode;
+  int[numOfNodes][numOfNodes] matrix;
 
-		vector<int>::iterator indexFound;
-
-		if(directed==1){
-			matrix[firstNode][secondNode] = 1;
-			
-			if(adjList[firstNode].size()==0){
-				adjList[firstNode].push_back(secondNode);
-			}else{
-				indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
-
-				if(indexFound==adjList[firstNode].end()){
-					adjList[firstNode].push_back(secondNode);
-				}
-			}
-		}else{
-			matrix[firstNode][secondNode] = 1;
-			matrix[secondNode][firstNode] = 1;
-			
-			if(adjList[firstNode].size()==0){
-				adjList[firstNode].push_back(secondNode);
-			}else{
-				indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
-
-				if(indexFound==adjList[firstNode].end()){
-					adjList[firstNode].push_back(secondNode);
-				}
-			}
-
-			if(adjList[secondNode].size()==0){
-				adjList[secondNode].push_back(firstNode);
-			}else{
-				indexFound = find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
-
-				if(indexFound==adjList[secondNode].end()){
-					adjList[secondNode].push_back(firstNode);
-				}
-			}
-		}
-	}
-
-	/*for(int i=0; i<adjList.size(); i++){
-		cout << "Node: " << i << endl;
-		for(int j=0; j<adjList[i].size(); j++){
-			cout << adjList[i][j] << endl;
-		}
-	}*/
-
-  vector<pair<int,int>>BFSTree;
-  if(directed==0){
-    BFSTree = BFS_list(adjList,nodes,1);
-  } else if(directed==1){
-    BFSTree = BFS_list(adjList,nodes,3);
-  }
 
   for(int i=0; i<nodes.size(); i++){
-    cout << "Node: " << i << endl;
-    cout << "distance: " << nodes[i]->distance << endl;
-    if(nodes[i]->parent != NULL){
-      cout << "parent: " << nodes[i]->parent->index << endl;
-    } else {
-      cout << "parent: NULL //This is the start Node" << endl;
-    }
+    nodes[i] = new Node();
+  }
 
-    cout << "edges: " << endl;
-    for(int j=0; j<BFSTree.size(); j++){
-      if(BFSTree[j].first == i ){
-        cout << BFSTree[j].second << endl;
-      }else if ( BFSTree[j].second == i  ) {
-        cout << BFSTree[j].first << endl;
+  while(getline(infile, line)){
+    stringstream s3(line);
+    s3 >> firstNode >> secondNode;
+
+    vector<int>::iterator indexFound;
+
+    if(directed==1){
+      matrix[firstNode][secondNode] = 1;
+
+      if(adjList[firstNode].size()==0){
+        adjList[firstNode].push_back(secondNode);
+      }else{
+        indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+
+        if(indexFound==adjList[firstNode].end()){
+          adjList[firstNode].push_back(secondNode);
+        }
+      }
+    }else{
+      matrix[firstNode][secondNode] = 1;
+      matrix[secondNode][firstNode] = 1;
+
+      if(adjList[firstNode].size()==0){
+        adjList[firstNode].push_back(secondNode);
+      }else{
+        indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+
+        if(indexFound==adjList[firstNode].end()){
+          adjList[firstNode].push_back(secondNode);
+        }
+      }
+
+      if(adjList[secondNode].size()==0){
+        adjList[secondNode].push_back(firstNode);
+      }else{
+        indexFound = find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
+
+        if(indexFound==adjList[secondNode].end()){
+          adjList[secondNode].push_back(firstNode);
+        }
       }
     }
   }
+
+  /*for(int i=0; i<adjList.size(); i++){
+  cout << "Node: " << i << endl;
+  for(int j=0; j<adjList[i].size(); j++){
+  cout << adjList[i][j] << endl;
+}
+}*/
+
+vector<pair<int,int>>BFSTree_List;
+vector<pair<int,int>>BFSTree_Mat;
+if(directed==0){
+  BFSTree_List = BFS_list(adjList,nodes,1);
+} else if(directed==1){
+  BFSTree_List = BFS_list(adjList,nodes,3);
 }
 
-// vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
-//     for(Node * u: nodes){
-//       u->color = 0;//white
-//       u->distance = -1;//infinity
-//       u->parent = NULL;
-//     }
-//     vector<pair<int,int> > edgesIncluded;
-//     queue<Node*> q;
-//     Node * s = nodes[start];
-//     s->color = 1;
-//     s->distance = 0;
-//     s->parent = NULL;
-//     s->index = start;
-//     q.push(s);
-//
-//     Node* curr;
-//     while(!q.empty()){
-//         curr = q.front();
-//         q.pop(); //remove current node from queue
-//
-//         for(int i = 0; i < mat[].size(); i++){ //check nodes adajcent to current node
-//             //for(int j = 0; j > mat[][].size(); j++){}
-//
-//             if(mat[curr->index][i] == 1 && nodes[i]->color == 0){ //if node is adjacent and not visited
-//                 nodes[i]->color = 1;    //mark node (grey)
-//                 nodes[i]->distance = curr->distance + 1;
-//                 nodes[i]->parent = curr;
-//                 nodes[i]->index = i;
-//                 pair<int,int> BFSedge(curr->index,i);
-//                 edgesIncluded.push_back(BFSedge)
-//                 q.push(nodes[i]);   //add to queue
-//             }
-//         }
-//         curr->color = 2; //current node has been explored (black)
-//
-//     }
-//
-//     return edgesIncluded;
-// }
+cout << "--------- BFS with adjacency list ---------" << endl;
+for(int i=0; i<nodes.size(); i++){
+  cout << "Node: " << i << endl;
+  cout << "distance: " << nodes[i]->distance << endl;
+  if(nodes[i]->parent != NULL){
+    cout << "parent: " << nodes[i]->parent->index << endl;
+  } else {
+    cout << "parent: NULL //This is the start Node" << endl;
+  }
+
+  cout << "edges: " << endl;
+  for(int j=0; j<BFSTree_List.size(); j++){
+    if(BFSTree_List[j].first == i ){
+      cout << BFSTree_List[j].second << endl;
+    }else if ( BFSTree_List[j].second == i  ) {
+      cout << BFSTree_List[j].first << endl;
+    }
+  }
+}
+cout << "---------------------------------------------" << endl;
+cout << "--------- BFS with adjacency Matrix ---------" << endl;
+if(directed==0){
+  BFSTree_Mat = BFS_mat(matrix,nodes,1);
+} else if(directed==1){
+  BFSTree_Mat = BFS_mat(matrix,nodes,3);
+}
+for(int i=0; i<nodes.size(); i++){
+  cout << "Node: " << i << endl;
+  cout << "distance: " << nodes[i]->distance << endl;
+  if(nodes[i]->parent != NULL){
+    cout << "parent: " << nodes[i]->parent->index << endl;
+  } else {
+    cout << "parent: NULL //This is the start Node" << endl;
+  }
+
+  cout << "edges: " << endl;
+  for(int j=0; j<BFSTree_Mat.size(); j++){
+    if(BFSTree_Mat[j].first == i ){
+      cout << BFSTree_Mat[j].second << endl;
+    }else if ( BFSTree_Mat[j].second == i  ) {
+      cout << BFSTree_Mat[j].first << endl;
+    }
+  }
+}
+cout << "---------------------------------------------" << endl;
+
+}
+
+vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
+  for(Node * u: nodes){
+    u->color = 0;//white
+    u->distance = -1;//infinity
+    u->parent = NULL;
+  }
+  vector<pair<int,int> > edgesIncluded;
+  queue<Node*> q;
+  Node * s = nodes[start];
+  s->color = 1;
+  s->distance = 0;
+  s->parent = NULL;
+  s->index = start;
+  q.push(s);
+
+  Node* curr;
+  while(!q.empty()){
+    curr = q.front();
+    q.pop(); //remove current node from queue
+
+    for(int i = 0; i < mat[].size(); i++){ //check nodes adajcent to current node
+      //for(int j = 0; j > mat[][].size(); j++){}
+
+      if(mat[curr->index][i] == 1 && nodes[i]->color == 0){ //if node is adjacent and not visited
+        nodes[i]->color = 1;    //mark node (grey)
+        nodes[i]->distance = curr->distance + 1;
+        nodes[i]->parent = curr;
+        nodes[i]->index = i;
+        pair<int,int> BFSedge(curr->index,i);
+        edgesIncluded.push_back(BFSedge)
+        q.push(nodes[i]);   //add to queue
+      }
+    }
+    curr->color = 2; //current node has been explored (black)
+
+  }
+
+  return edgesIncluded;
+}
 
 vector<pair<int,int> > BFS_list(vector<vector<int> > adjList, vector<Node* > vertex, int startNode){
   for(Node * u: vertex){
@@ -187,7 +216,7 @@ vector<pair<int,int> > BFS_list(vector<vector<int> > adjList, vector<Node* > ver
   Node * x;
   Node * v;
   while(!q.empty()){
-     x = q.front();
+    x = q.front();
     q.pop();
     for(int edge: adjList[x->index]){
       v = vertex[edge];
