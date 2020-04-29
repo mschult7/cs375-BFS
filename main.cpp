@@ -23,6 +23,8 @@ class Node{
 		}
 };
 
+vector<pair<int,int> > BFS_list(vector<vector<int> >, vector<Node* >, int);
+
 int main(int argc, char* argv[]){
 	int directed = -1; //directed = 1, undirected = 0
     int numOfNodes = -1, numOfEdges = -1;
@@ -91,45 +93,45 @@ int main(int argc, char* argv[]){
   BFS_list(adjList,nodes,1);
 }
 
-vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
-    for(Node * u: nodes){
-      u->color = 0;//white
-      u->distance = -1;//infinity
-      u->parent = NULL;
-    }
-    vector<pair<int,int> > edgesIncluded;
-    queue<Node*> q;
-    Node * s = nodes[start];
-    s->color = 1;
-    s->distance = 0;
-    s->parent = NULL;
-    s->index = start;
-    q.push(s);
-
-    Node* curr;
-    while(!q.empty()){
-        curr = q.front();
-        q.pop(); //remove current node from queue
-
-        for(int i = 0; i < mat[].size(); i++){ //check nodes adajcent to current node
-            //for(int j = 0; j > mat[][].size(); j++){}
-
-            if(mat[curr->index][i] == 1 && nodes[i]->color == 0){ //if node is adjacent and not visited
-                nodes[i]->color = 1;    //mark node (grey)
-                nodes[i]->distance = curr->distance + 1;
-                nodes[i]->parent = curr;
-                nodes[i]->index = i;
-                pair<int,int> BFSedge(curr->index,i);
-                edgesIncluded.push_back(BFSedge)
-                q.push(nodes[i]);   //add to queue
-            }
-        }
-        curr->color = 2; //current node has been explored (black)
-
-    }
-
-    return edgesIncluded;
-}
+// vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
+//     for(Node * u: nodes){
+//       u->color = 0;//white
+//       u->distance = -1;//infinity
+//       u->parent = NULL;
+//     }
+//     vector<pair<int,int> > edgesIncluded;
+//     queue<Node*> q;
+//     Node * s = nodes[start];
+//     s->color = 1;
+//     s->distance = 0;
+//     s->parent = NULL;
+//     s->index = start;
+//     q.push(s);
+//
+//     Node* curr;
+//     while(!q.empty()){
+//         curr = q.front();
+//         q.pop(); //remove current node from queue
+//
+//         for(int i = 0; i < mat[].size(); i++){ //check nodes adajcent to current node
+//             //for(int j = 0; j > mat[][].size(); j++){}
+//
+//             if(mat[curr->index][i] == 1 && nodes[i]->color == 0){ //if node is adjacent and not visited
+//                 nodes[i]->color = 1;    //mark node (grey)
+//                 nodes[i]->distance = curr->distance + 1;
+//                 nodes[i]->parent = curr;
+//                 nodes[i]->index = i;
+//                 pair<int,int> BFSedge(curr->index,i);
+//                 edgesIncluded.push_back(BFSedge)
+//                 q.push(nodes[i]);   //add to queue
+//             }
+//         }
+//         curr->color = 2; //current node has been explored (black)
+//
+//     }
+//
+//     return edgesIncluded;
+// }
 
 vector<pair<int,int> > BFS_list(vector<vector<int> > adjList, vector<Node* > vertex, int startNode){
   for(Node * u: vertex){
