@@ -95,9 +95,9 @@ int main(int argc, char* argv[]){
 	}*/
 
   vector<pair<int,int>>BFSTree;
-  if(argv[1]=="undirected_graph1.txt"){
+  if(directed==0){
     BFSTree = BFS_list(adjList,nodes,1);
-  } else if(argv[1]=="directed_graph1.txt"){
+  } else if(directed==1){
     BFSTree = BFS_list(adjList,nodes,3);
   }
 
