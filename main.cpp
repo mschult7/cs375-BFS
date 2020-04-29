@@ -161,7 +161,7 @@ vector<pair<int,int> > BFS_list(vector<vector<int> > adjList, vector<Node* > ver
         v->index = edge;
         pair<int,int> BFSedge(x->index,v->index);
         edgesIncluded.push_back(BFSedge);
-        Q.push(v);
+        q.push(v);
       }
     }
     x->color = 2;//black
