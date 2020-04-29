@@ -24,6 +24,7 @@ public:
 };
 
 vector<pair<int,int> > BFS_list(vector<vector<int> >, vector<Node* >, int);
+vector<pair<int,int> > BFS_mat(int[][], vector<Node* >, int);
 
 int main(int argc, char* argv[]){
   int directed = -1; //directed = 1, undirected = 0
