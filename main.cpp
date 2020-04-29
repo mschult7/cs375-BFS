@@ -65,6 +65,11 @@ int main(int argc, char* argv[]){
 }
 
 vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
+    for(Node * u: nodes){
+      u->color = 0;//white
+      u->distance = -1;//infinity
+      u->parent = NULL;
+    }
     vector<pair<int,int> > edgesIncluded;
     queue<Node*> q;
     Node * s = nodes[start];
@@ -100,6 +105,11 @@ vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
 }
 
 vector<pair<int,int> > BFS_list(vector<vector<int> > adjList, vector<Node* > vertex, int startNode){
+  for(Node * u: vertex){
+    u->color = 0;//white
+    u->distance = -1;//infinity
+    u->parent = NULL;
+  }
   vector<pair<int,int> > edgesIncluded;
   Node * s = vertex[startNode];
   s->color = 1;//grey
