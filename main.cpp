@@ -50,18 +50,53 @@ int main(int argc, char* argv[]){
 
 		}else{
 			int indexFound = adjList[firstNode].find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
-			
+
 			if(indexFound!=adjList[firstNode].end()){
 				adjList[firstNode].push_back(secondNode);
 			}
-			
+
 			indexFound = adjList[secondNode].find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
-			
+
 			if(indexFound!=adjList[secondNode].end()){
 				adjList[secondNode].push_back(firstNode);
 			}
 		}
 	}
+}
+
+vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
+    vector<pair<int,int> > edgesIncluded;
+    queue<Node*> q;
+    Node * s = nodes[start];
+    s->color = 1;
+    s->distance = 0;
+    s->parent = NULL;
+    s->index = start;
+    q.push(s);
+
+    Node* curr;
+    while(!q.empty()){
+        curr = q.front();
+        q.pop(); //remove current node from queue
+
+        for(int i = 0; i < mat[].size(); i++){ //check nodes adajcent to current node
+            //for(int j = 0; j > mat[][].size(); j++){}
+
+            if(mat[curr->index][i] == 1 && nodes[i]->color == 0){ //if node is adjacent and not visited
+                nodes[i]->color = 1;    //mark node (grey)
+                nodes[i]->distance = curr->distance + 1;
+                nodes[i]->parent = curr;
+                nodes[i]->index = i;
+                pair<int,int> BFSedge(curr->index,i);
+                edgesIncluded.push_back(BFSedge)
+                q.push(nodes[i]);   //add to queue
+            }
+        }
+        curr->color = 2; //current node has been explored (black)
+
+    }
+
+    return edgesIncluded;
 }
 
 vector<pair<int,int> > BFS_list(vector<vector<int> > adjList, vector<Node* > vertex, int startNode){
@@ -71,13 +106,15 @@ vector<pair<int,int> > BFS_list(vector<vector<int> > adjList, vector<Node* > ver
   s->distance = 0;//origin
   s->parent = NULL;
   s->index = startNode;
-  queue<Node *> Q;
-  Q.push(s);
-  while(!Q.empty()){
-    Node * x = Q.front();
-    Q.pop();
+  queue<Node *> q;
+  q.push(s);
+  Node * x;
+  Node * v;
+  while(!q.empty()){
+     x = q.front();
+    q.pop();
     for(int edge: adjList[x->index]){
-      Node * v = vertex[edge];
+      v = vertex[edge];
       if(v->color==0){//white
         v->color=1;//grey
         v->distance = x->distance + 1;
