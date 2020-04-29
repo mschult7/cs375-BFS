@@ -43,7 +43,10 @@ int main(int argc, char* argv[]){
 	s2 >> numOfNodes >> numOfEdges;
 
 	vector<vector<int> > adjList; adjList.resize(numOfNodes);
-	vector<Node *> nodes; nodes.resize(numOfNodes, new Node());
+	vector<Node *> nodes; nodes.resize(numOfNodes);
+	for(int i=0; i<nodes.size(); i++){
+		nodes[i] = new Node();
+	}	
 
 	while(getline(infile, line)){
 		stringstream s3(line);
