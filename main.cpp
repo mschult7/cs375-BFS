@@ -3,7 +3,8 @@
 #include<sstream>
 #include<string>
 #include<vector>
-#include <queue>
+#include<queue>
+#include<algorithm>
 
 using namespace std;
 
@@ -21,6 +22,8 @@ class Node{
 			parent = NULL;
 		}
 };
+
+vector<pair<int,int> > BFS_list(vector<vector<int> >, vector<Node* >, int startNode);
 
 int main(int argc, char* argv[]){
 	int directed = 0; //directed = 1, undirected = 0
@@ -49,19 +52,22 @@ int main(int argc, char* argv[]){
 		if(directed==1){
 
 		}else{
-			int indexFound = adjList[firstNode].find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+			vector<int>::iterator indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
 			
 			if(indexFound!=adjList[firstNode].end()){
 				adjList[firstNode].push_back(secondNode);
 			}
 			
-			indexFound = adjList[secondNode].find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
+			indexFound = find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
 			
 			if(indexFound!=adjList[secondNode].end()){
 				adjList[secondNode].push_back(firstNode);
 			}
 		}
 	}
+	
+	cout << directed << "\n" << numOfNodes << " " << numOfEdges << endl;
+	//BFS_list(adjList, nodes, 0);
 }
 
 vector<pair<int,int> > BFS_list(vector<vector<int> > adjList, vector<Node* > vertex, int startNode){
