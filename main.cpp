@@ -22,7 +22,7 @@ class Node{
 };
 
 int main(int argc, char* argv[]){
-	bool directed = false; //directed = true, undirected = false
+	int directed = 0; //directed = 1, undirected = 0
     int numOfNodes = 0, numOfEdges = 0;
 	
 	int firstNode = 0, secondNode = 0;
@@ -31,20 +31,26 @@ int main(int argc, char* argv[]){
 	ifstream infile(argv[1]);
 
 	getline(infile, line);
-	stringstream s(line);
-	s >> directed;
+	directed = stoi(line);
 	
 	getline(infile, line);
-	stringstream s2(line);
+	stringstream s(line);
 	s >> numOfNodes >> numOfEdges;
 	
 	vector<vector<int> > adjList;
+	vector<Node *> nodes; nodes.resize(numOfNodes);
 
 	while(getline(infile, line)){
-		stringstream s3(line);
+		stringstream s2(line);
 		
+		s2 >> firstNode >> secondNode;
 		
+		if(directed==1){
+			
+		}else{
+			if()
+		}
 	}
-
-	cout << directed << "\n" << numOfNodes << ", " << numOfEdges << endl;
+	
+	
 }
