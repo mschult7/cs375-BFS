@@ -45,7 +45,7 @@ int main(int argc, char* argv[]){
   vector<vector<int> > adjList; adjList.resize(numOfNodes);
   vector<Node *> nodes; nodes.resize(numOfNodes);
 
-  int[numOfNodes][numOfNodes] matrix;
+  int matrix[numOfNodes][numOfNodes];
 
 
   for(int i=0; i<nodes.size(); i++){
