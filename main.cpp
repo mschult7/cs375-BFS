@@ -4,7 +4,8 @@
 #include<sstream>
 #include<string>
 #include<vector>
-#include <queue>
+#include<queue>
+#include<chrono>
 
 using namespace std;
 
@@ -106,11 +107,14 @@ int main(int argc, char* argv[]){
 
 vector<pair<int,int>>BFSTree_List;
 vector<pair<int,int>>BFSTree_Mat;
+
+auto start = chrono::steady_clock::now();
 if(directed==0){
   BFSTree_List = BFS_list(adjList,nodes,1);
 } else if(directed==1){
   BFSTree_List = BFS_list(adjList,nodes,3);
 }
+auto end = chrono::steady_clock::now();
 
 cout << "--------- BFS with adjacency list ---------" << endl;
 for(int i=0; i<nodes.size(); i++){
@@ -131,13 +135,19 @@ for(int i=0; i<nodes.size(); i++){
     }
   }
 }
+cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
+
 cout << "---------------------------------------------" << endl;
 cout << "--------- BFS with adjacency Matrix ---------" << endl;
+
+start = chrono::steady_clock::now();
 if(directed==0){
   BFSTree_Mat = BFS_mat(matrix,nodes,1);
 } else if(directed==1){
   BFSTree_Mat = BFS_mat(matrix,nodes,3);
 }
+end = chrono::steady_clock::now();
+
 for(int i=0; i<nodes.size(); i++){
   cout << "Node: " << i << endl;
   cout << "distance: " << nodes[i]->distance << endl;
@@ -156,8 +166,9 @@ for(int i=0; i<nodes.size(); i++){
     }
   }
 }
-cout << "---------------------------------------------" << endl;
 
+cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
+cout << "---------------------------------------------" << endl;
 }
 
 vector<pair<int,int> > BFS_mat(vector<vector<int> > matrix, vector<Node*> nodes, int start){
