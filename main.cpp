@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
 
   int qez =0;
   for(int i=1;i<101;i++){
-    if(i%2==0){
+    if(i%2==1){
       qez++;
     }
     cout << qez << " " << i << endl;
