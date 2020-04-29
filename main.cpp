@@ -23,45 +23,70 @@ class Node{
 };
 
 int main(int argc, char* argv[]){
-	int directed = 0; //directed = 1, undirected = 0
-    int numOfNodes = 0, numOfEdges = 0;
+	int directed = -1; //directed = 1, undirected = 0
+    int numOfNodes = -1, numOfEdges = -1;
 
-	int firstNode = 0, secondNode = 0;
+	int firstNode = -1, secondNode = -1;
 	string line;
 
 	ifstream infile(argv[1]);
 
 	getline(infile, line);
-	directed = stoi(line);
+	stringstream s1(line);
+	s1 >> directed;
 
 	getline(infile, line);
-	stringstream s(line);
-	s >> numOfNodes >> numOfEdges;
+	stringstream s2(line);
+	s2 >> numOfNodes >> numOfEdges;
 
-	vector<vector<int> > adjList;
+	vector<vector<int> > adjList; adjList.resize(numOfNodes);
 	vector<Node *> nodes; nodes.resize(numOfNodes);
 
 	while(getline(infile, line)){
-		stringstream s2(line);
-
-		s2 >> firstNode >> secondNode;
+		stringstream s3(line);
+		s3 >> firstNode >> secondNode;
+		
+		vector<int>::iterator indexFound;
 
 		if(directed==1){
-
-		}else{
-			int indexFound = adjList[firstNode].find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
-
-			if(indexFound!=adjList[firstNode].end()){
+			if(adjList[firstNode].size()==0){
 				adjList[firstNode].push_back(secondNode);
+			}else{
+				indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+				
+				if(indexFound==adjList[firstNode].end()){
+					adjList[firstNode].push_back(secondNode);
+				}
 			}
-
-			indexFound = adjList[secondNode].find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
-
-			if(indexFound!=adjList[secondNode].end()){
+		}else{
+			if(adjList[firstNode].size()==0){
+				adjList[firstNode].push_back(secondNode);
+			}else{
+				indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+				
+				if(indexFound==adjList[firstNode].end()){
+					adjList[firstNode].push_back(secondNode);
+				}
+			}
+			
+			if(adjList[secondNode].size()==0){
 				adjList[secondNode].push_back(firstNode);
+			}else{
+				indexFound = find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
+			
+				if(indexFound==adjList[secondNode].end()){
+					adjList[secondNode].push_back(firstNode);
+				}
 			}
 		}
 	}
+	
+	/*for(int i=0; i<adjList.size(); i++){
+		cout << "Node: " << i << endl;
+		for(int j=0; j<adjList[i].size(); j++){
+			cout << adjList[i][j] << endl;
+		}
+	}*/
 }
 
 vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
