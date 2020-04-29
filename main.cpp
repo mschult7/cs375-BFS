@@ -180,16 +180,16 @@ vector<pair<int,int> > BFS_mat(vector<vector<int> > matrix, vector<Node*> nodes,
     curr = q.front();
     q.pop(); //remove current node from queue
 
-    for(int i = 0; i < mat[].size(); i++){ //check nodes adajcent to current node
+    for(int i = 0; i < matrix.size(); i++){ //check nodes adajcent to current node
       //for(int j = 0; j > mat[][].size(); j++){}
 
-      if(mat[curr->index][i] == 1 && nodes[i]->color == 0){ //if node is adjacent and not visited
+      if(matrix[curr->index][i] == 1 && nodes[i]->color == 0){ //if node is adjacent and not visited
         nodes[i]->color = 1;    //mark node (grey)
         nodes[i]->distance = curr->distance + 1;
         nodes[i]->parent = curr;
         nodes[i]->index = i;
         pair<int,int> BFSedge(curr->index,i);
-        edgesIncluded.push_back(BFSedge)
+        edgesIncluded.push_back(BFSedge);
         q.push(nodes[i]);   //add to queue
       }
     }
