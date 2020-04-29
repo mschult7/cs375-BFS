@@ -48,12 +48,9 @@ int main(int argc, char* argv[]){
 
   vector<vector<int> > matrix; matrix.resize(numOfNodes);
 
-  for(int i=0; i<matrix.size(); i++){
-	  matrix[i].resize(numOfNodes);
-  }
-
   for(int i=0; i<nodes.size(); i++){
     nodes[i] = new Node();
+    matrix[i].resize(numOfNodes);
   }
 
   while(getline(infile, line)){
