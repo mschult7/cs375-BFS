@@ -49,15 +49,23 @@ int main(int argc, char* argv[]){
 		if(directed==1){
 
 		}else{
-			if()
+			int indexFound = adjList[firstNode].find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+			
+			if(indexFound!=adjList[firstNode].end()){
+				adjList[firstNode].push_back(secondNode);
+			}
+			
+			indexFound = adjList[secondNode].find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
+			
+			if(indexFound!=adjList[secondNode].end()){
+				adjList[secondNode].push_back(firstNode);
+			}
 		}
 	}
-
-
 }
 
-vector<pair<int,int>> BFS_list(vector<vector<int> > adjList, vector<Node* > vertex, int startNode;){
-  vector<pair<int,int>> edgesIncluded;
+vector<pair<int,int> > BFS_list(vector<vector<int> > adjList, vector<Node* > vertex, int startNode){
+  vector<pair<int,int> > edgesIncluded;
   Node * s = vertex[startNode];
   s->color = 1;//grey
   s->distance = 0;//origin
@@ -84,3 +92,5 @@ vector<pair<int,int>> BFS_list(vector<vector<int> > adjList, vector<Node* > vert
   }
   return edgesIncluded;
 }
+
+//it = find (myvector.begin(), myvector.end(), 30);
