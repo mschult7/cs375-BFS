@@ -46,7 +46,7 @@ int main(int argc, char* argv[]){
 	vector<Node *> nodes; nodes.resize(numOfNodes);
 	for(int i=0; i<nodes.size(); i++){
 		nodes[i] = new Node();
-	}	
+	}
 
 	while(getline(infile, line)){
 		stringstream s3(line);
@@ -93,7 +93,20 @@ int main(int argc, char* argv[]){
 			cout << adjList[i][j] << endl;
 		}
 	}*/
-  BFS_list(adjList,nodes,1);
+  vector<pair<int,int>>BFSTree = BFS_list(adjList,nodes,1);
+  for(int i=0; i<nodes.size(); i++){
+    cout << "Node: " << i << endl;
+    cout << "distance: " << nodes[i]->distance << endl;
+    cout << "parent: " << nodes[i]->parent->index << endl;
+    cout << "edges: " << endl;
+    for(int j=0; j<BFSTree.size(); j++){
+      if(BFSTree[j].first == i ){
+        cout << BFSTree[j].second << endl;
+      }else if ( BFSTree[j].second == i  ) {
+        cout << BFSTree[j].first << endl;
+      }
+    }
+  }
 }
 
 // vector<pair<int,int> > BFS_mat(int[][] mat, vector<Node*> nodes, int start){
