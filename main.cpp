@@ -28,6 +28,15 @@ vector<pair<int,int> > BFS_list(vector<vector<int> >, vector<Node* >, int);
 vector<pair<int,int> > BFS_mat(vector<vector<int> >, vector<Node* >, int);
 
 int main(int argc, char* argv[]){
+
+  int qez =0;
+  for(int i=1;i<101;i++){
+    if(i%2==0){
+      qez++;
+    }
+    cout << qez << " " << i << endl;
+
+  }
   int directed = -1; //directed = 1, undirected = 0
   int numOfNodes = -1, numOfEdges = -1;
 
