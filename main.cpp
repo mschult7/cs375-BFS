@@ -93,7 +93,14 @@ int main(int argc, char* argv[]){
 			cout << adjList[i][j] << endl;
 		}
 	}*/
-  vector<pair<int,int>>BFSTree = BFS_list(adjList,nodes,1);
+
+  vector<pair<int,int>>BFSTree;
+  if(argv[1]=="undirected_graph1.txt"){
+    BFSTree = BFS_list(adjList,nodes,1);
+  } else if()argv[1]=="directed_graph1.txt"{
+    BFSTree = BFS_list(adjList,nodes,3);
+  }
+
   for(int i=0; i<nodes.size(); i++){
     cout << "Node: " << i << endl;
     cout << "distance: " << nodes[i]->distance << endl;
