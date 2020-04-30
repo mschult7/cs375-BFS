@@ -198,16 +198,20 @@ runtimeMatrix.push_back(chrono::duration_cast<chrono::microseconds>(end - start)
 cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
 cout << "---------------------------------------------" << endl;
 }
-auto nList = runtimeList.size();
-float averagel = 0.0f;
-if ( nList != 0) {
-     averagel = accumulate( runtimeList.begin(), runtimeList.end(), 0.0) / nList;
+int nList = runtimeList.size();
+double averagel = 0.0;
+for(int i=0;i<nList){
+  averagel += runtimeList[i];
 }
-auto nMatrix = runtimeMatrix.size();
-float averagem = 0.0f;
-if ( nMatrix != 0) {
-     averagem = accumulate( runtimeMatrix.begin(), runtimeMatrix.end(), 0.0) / nMatrix;
+averagel = averagel/nList;
+
+int nMat = runtimeMatrix.size();
+double averagem = 0.0;
+for(int i=0;i<nMat){
+  averagem += runtimeMatrix[i];
 }
+averagem = averagem/nMat;
+
 
 cout << "average adjList: " << averagel << endl;
 cout << "average adjMatrix: " << averagem  << endl;
