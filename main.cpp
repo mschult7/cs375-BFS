@@ -158,7 +158,7 @@ if(printBFSTree){
   }
 }
 
-runtimeList[i] = (chrono::duration_cast<chrono::microseconds>(end - start).count());
+runtimeList[tester] = (chrono::duration_cast<chrono::microseconds>(end - start).count());
 cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
 
 cout << "---------------------------------------------" << endl;
@@ -193,7 +193,7 @@ if(printBFSTree){
   }
 
 }
-runtimeMatrix[i] = (chrono::duration_cast<chrono::microseconds>(end - start).count());
+runtimeMatrix[tester] = (chrono::duration_cast<chrono::microseconds>(end - start).count());
 
 cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
 cout << "---------------------------------------------" << endl;
