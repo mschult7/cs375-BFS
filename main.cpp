@@ -125,26 +125,34 @@ if(directed==0){
   BFSTree_List = BFS_list(adjList,nodes,0);
 }
 auto end = chrono::steady_clock::now();
+int printBFSTree = 1;
+if(argv[2]!=NULL){
+  printBFSTree = stoi(argv[2]);
+}
 
 cout << "--------- BFS with adjacency list ---------" << endl;
-for(int i=0; i<nodes.size(); i++){
-  cout << "Node: " << i << endl;
-  cout << "distance: " << nodes[i]->distance << endl;
-  if(nodes[i]->parent != NULL){
-    cout << "parent: " << nodes[i]->parent->index << endl;
-  } else {
-    cout << "parent: NULL //This is the start Node" << endl;
-  }
+if(printBFSTree){
 
-  cout << "edges: " << endl;
-  for(int j=0; j<BFSTree_List.size(); j++){
-    if(BFSTree_List[j].first == i ){
-      cout << BFSTree_List[j].second << endl;
-    }else if ( BFSTree_List[j].second == i && directed==0 ) {
-      cout << BFSTree_List[j].first << endl;
+  for(int i=0; i<nodes.size(); i++){
+    cout << "Node: " << i << endl;
+    cout << "distance: " << nodes[i]->distance << endl;
+    if(nodes[i]->parent != NULL){
+      cout << "parent: " << nodes[i]->parent->index << endl;
+    } else {
+      cout << "parent: NULL //This is the start Node" << endl;
+    }
+
+    cout << "edges: " << endl;
+    for(int j=0; j<BFSTree_List.size(); j++){
+      if(BFSTree_List[j].first == i ){
+        cout << BFSTree_List[j].second << endl;
+      }else if ( BFSTree_List[j].second == i && directed==0 ) {
+        cout << BFSTree_List[j].first << endl;
+      }
     }
   }
 }
+
 cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
 
 cout << "---------------------------------------------" << endl;
@@ -158,23 +166,26 @@ if(directed==0){
 }
 end = chrono::steady_clock::now();
 
-for(int i=0; i<nodes.size(); i++){
-  cout << "Node: " << i << endl;
-  cout << "distance: " << nodes[i]->distance << endl;
-  if(nodes[i]->parent != NULL){
-    cout << "parent: " << nodes[i]->parent->index << endl;
-  } else {
-    cout << "parent: NULL //This is the start Node" << endl;
-  }
+if(printBFSTree){
+  for(int i=0; i<nodes.size(); i++){
+    cout << "Node: " << i << endl;
+    cout << "distance: " << nodes[i]->distance << endl;
+    if(nodes[i]->parent != NULL){
+      cout << "parent: " << nodes[i]->parent->index << endl;
+    } else {
+      cout << "parent: NULL //This is the start Node" << endl;
+    }
 
-  cout << "edges: " << endl;
-  for(int j=0; j<BFSTree_Mat.size(); j++){
-    if(BFSTree_Mat[j].first == i ){
-      cout << BFSTree_Mat[j].second << endl;
-    }else if ( BFSTree_Mat[j].second == i && directed==0 ) {
-      cout << BFSTree_Mat[j].first << endl;
+    cout << "edges: " << endl;
+    for(int j=0; j<BFSTree_Mat.size(); j++){
+      if(BFSTree_Mat[j].first == i ){
+        cout << BFSTree_Mat[j].second << endl;
+      }else if ( BFSTree_Mat[j].second == i && directed==0 ) {
+        cout << BFSTree_Mat[j].first << endl;
+      }
     }
   }
+
 }
 
 cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
