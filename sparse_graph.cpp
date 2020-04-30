@@ -8,20 +8,9 @@ using namespace std;
 
 int main(int argc, char* argv[]){
     int numOfNodes = 100, numOfEdges = 0;
-	
-	//int firstNode = 0, secondNode = -1;
+
     int firstNode = 1, secondNode = -1;
 	vector<vector<int> > adjList; adjList.resize(numOfNodes);
-	/*
-	for(int i=1; i<numOfNodes; i++){
-		secondNode = i;
-		for(int j=0; j<secondNode; j++){
-			firstNode = j;
-			adjList[firstNode].push_back(secondNode); 
-			numOfEdges++;
-		}
-	}
-    */
 
     for(int i=1; i < numOfNodes; i++){
         secondNode = i-1;
