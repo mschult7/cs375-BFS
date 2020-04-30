@@ -31,10 +31,11 @@ int main(int argc, char* argv[]){
 
   int qez =0;
   for(int i=1;i<101;i++){
-    if(i%2==1){
+    cout << qez << " " << i << endl;
+    if(i%2==0){
       qez++;
     }
-    cout << qez << " " << i << endl;
+
 
   }
   int directed = -1; //directed = 1, undirected = 0
