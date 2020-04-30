@@ -37,7 +37,7 @@ int main(int argc, char* argv[]){
   //   }
   //
 
-  }
+  //}
   int directed = -1; //directed = 1, undirected = 0
   int numOfNodes = -1, numOfEdges = -1;
 
