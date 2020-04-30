@@ -5,4 +5,4 @@ main.o:	main.cpp
 	g++ -c -g main.cpp
 
 clean:
-	rm *.o BFS
+	rm *.o BFS a.out
