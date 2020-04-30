@@ -72,8 +72,6 @@ int main(int argc, char* argv[]){
     while(getline(infile, line)){
       stringstream s3(line);
       s3 >> firstNode >> secondNode;
-	  
-	  if(secondNode == -1) continue;
 
       vector<int>::iterator indexFound;
 
