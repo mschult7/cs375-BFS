@@ -135,9 +135,9 @@ if(argv[2]!=NULL){
   printBFSTree = stoi(argv[2]);
 }
 
-cout << "--------- BFS with adjacency list ---------" << endl;
-if(printBFSTree){
 
+if(printBFSTree){
+cout << "--------- BFS with adjacency list ---------" << endl;
   for(int i=0; i<nodes.size(); i++){
     cout << "Node: " << i << endl;
     cout << "distance: " << nodes[i]->distance << endl;
