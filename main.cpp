@@ -197,7 +197,19 @@ runtimeMatrix.push_back(chrono::duration_cast<chrono::microseconds>(end - start)
 cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
 cout << "---------------------------------------------" << endl;
 }
+auto nList = runtimeList.size();
+float averagel = 0.0f;
+if ( nList != 0) {
+     averagel = accumulate( runtimeList.begin(), runtimeList.end(), 0.0) / nList;
+}
+auto nMatrix = runtimeMatrix.size();
+float averagem = 0.0f;
+if ( nMatrix != 0) {
+     averagem = accumulate( runtimeMatrix.begin(), runtimeMatrix.end(), 0.0) / nMatrix;
+}
 
+cout << "average adjList: " < averagel << endl;
+cout << "average adjMatrix: " < averagem << endl;
 }
 
 vector<pair<int,int> > BFS_mat(vector<vector<int> > matrix, vector<Node*> nodes, int start){
