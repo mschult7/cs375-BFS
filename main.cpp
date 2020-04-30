@@ -209,8 +209,8 @@ if ( nMatrix != 0) {
      averagem = accumulate( runtimeMatrix.begin(), runtimeMatrix.end(), 0.0) / nMatrix;
 }
 
-cout << "average adjList: " < averagel << endl;
-cout << "average adjMatrix: " < averagem << endl;
+cout << "average adjList: " < averagel << "" << endl;
+cout << "average adjMatrix: " < averagem << "" << endl;
 }
 
 vector<pair<int,int> > BFS_mat(vector<vector<int> > matrix, vector<Node*> nodes, int start){
