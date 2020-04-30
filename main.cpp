@@ -29,13 +29,13 @@ vector<pair<int,int> > BFS_mat(vector<vector<int> >, vector<Node* >, int);
 
 int main(int argc, char* argv[]){
 
-  int qez =0;
-  for(int i=1;i<101;i++){
-    cout << qez << " " << i << endl;
-    if(i%2==0){
-      qez++;
-    }
-
+  // int qez =0;
+  // for(int i=1;i<101;i++){
+  //   cout << qez << " " << i << endl;
+  //   if(i%2==0){
+  //     qez++;
+  //   }
+  //
 
   }
   int directed = -1; //directed = 1, undirected = 0
