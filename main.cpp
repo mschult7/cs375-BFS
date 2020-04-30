@@ -140,7 +140,7 @@ for(int i=0; i<nodes.size(); i++){
   for(int j=0; j<BFSTree_List.size(); j++){
     if(BFSTree_List[j].first == i ){
       cout << BFSTree_List[j].second << endl;
-    }else if ( BFSTree_List[j].second == i && directed==1 ) {
+    }else if ( BFSTree_List[j].second == i && directed==0 ) {
       cout << BFSTree_List[j].first << endl;
     }
   }
@@ -171,7 +171,7 @@ for(int i=0; i<nodes.size(); i++){
   for(int j=0; j<BFSTree_Mat.size(); j++){
     if(BFSTree_Mat[j].first == i ){
       cout << BFSTree_Mat[j].second << endl;
-    }else if ( BFSTree_Mat[j].second == i && directed==1 ) {
+    }else if ( BFSTree_Mat[j].second == i && directed==0 ) {
       cout << BFSTree_Mat[j].first << endl;
     }
   }
