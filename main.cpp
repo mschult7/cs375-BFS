@@ -200,14 +200,14 @@ cout << "---------------------------------------------" << endl;
 }
 int nList = runtimeList.size();
 double averagel = 0.0;
-for(int i=0;i<nList){
+for(int i=0;i<nList;i++){
   averagel += runtimeList[i];
 }
 averagel = averagel/nList;
 
 int nMat = runtimeMatrix.size();
 double averagem = 0.0;
-for(int i=0;i<nMat){
+for(int i=0;i<nMat;i++){
   averagem += runtimeMatrix[i];
 }
 averagem = averagem/nMat;
