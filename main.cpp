@@ -28,8 +28,8 @@ vector<pair<int,int> > BFS_list(vector<vector<int> >, vector<Node* >, int);
 vector<pair<int,int> > BFS_mat(vector<vector<int> >, vector<Node* >, int);
 
 int main(int argc, char* argv[]){
-  vector<auto> runtimeList;
-  vector<auto> runtimeMatrix;
+  vector<int> runtimeList;
+  vector<int> runtimeMatrix;
 
   // int qez =0;
   // for(int i=1;i<101;i++){
