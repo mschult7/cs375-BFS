@@ -120,9 +120,9 @@ vector<pair<int,int>>BFSTree_Mat;
 
 auto start = chrono::steady_clock::now();
 if(directed==0){
-  BFSTree_List = BFS_list(adjList,nodes,1);
+  BFSTree_List = BFS_list(adjList,nodes,0);
 } else if(directed==1){
-  BFSTree_List = BFS_list(adjList,nodes,3);
+  BFSTree_List = BFS_list(adjList,nodes,0);
 }
 auto end = chrono::steady_clock::now();
 
@@ -152,9 +152,9 @@ cout << "--------- BFS with adjacency Matrix ---------" << endl;
 
 start = chrono::steady_clock::now();
 if(directed==0){
-  BFSTree_Mat = BFS_mat(matrix,nodes,1);
+  BFSTree_Mat = BFS_mat(matrix,nodes,0);
 } else if(directed==1){
-  BFSTree_Mat = BFS_mat(matrix,nodes,3);
+  BFSTree_Mat = BFS_mat(matrix,nodes,0);
 }
 end = chrono::steady_clock::now();
 
