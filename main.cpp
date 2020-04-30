@@ -156,13 +156,11 @@ if(printBFSTree){
       }
     }
   }
+  cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
 }
 
 runtimeList[tester] = (chrono::duration_cast<chrono::microseconds>(end - start).count());
-cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
 
-cout << "---------------------------------------------" << endl;
-cout << "--------- BFS with adjacency Matrix ---------" << endl;
 
 start = chrono::steady_clock::now();
 if(directed==0){
@@ -173,6 +171,9 @@ if(directed==0){
 end = chrono::steady_clock::now();
 
 if(printBFSTree){
+
+  cout << "---------------------------------------------" << endl;
+  cout << "--------- BFS with adjacency Matrix ---------" << endl;
   for(int i=0; i<nodes.size(); i++){
     cout << "Node: " << i << endl;
     cout << "distance: " << nodes[i]->distance << endl;
@@ -191,12 +192,12 @@ if(printBFSTree){
       }
     }
   }
-
+  cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
+  cout << "---------------------------------------------" << endl;
 }
 runtimeMatrix[tester] = (chrono::duration_cast<chrono::microseconds>(end - start).count());
 
-cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
-cout << "---------------------------------------------" << endl;
+
 }
 int nList = runtimeList.size();
 double averagel = 0.0;
