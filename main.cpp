@@ -28,6 +28,8 @@ vector<pair<int,int> > BFS_list(vector<vector<int> >, vector<Node* >, int);
 vector<pair<int,int> > BFS_mat(vector<vector<int> >, vector<Node* >, int);
 
 int main(int argc, char* argv[]){
+  vector<auto> runtimeList;
+  vector<auto> runtimeMatrix;
 
   // int qez =0;
   // for(int i=1;i<101;i++){
@@ -38,81 +40,83 @@ int main(int argc, char* argv[]){
   //
 
   //}
-  int directed = -1; //directed = 1, undirected = 0
-  int numOfNodes = -1, numOfEdges = -1;
 
-  int firstNode = -1, secondNode = -1;
-  string line;
+  for(int tester=0;tester<100;tester++){
+    int directed = -1; //directed = 1, undirected = 0
+    int numOfNodes = -1, numOfEdges = -1;
 
-  ifstream infile(argv[1]);
+    int firstNode = -1, secondNode = -1;
+    string line;
 
-  getline(infile, line);
-  stringstream s1(line);
-  s1 >> directed;
+    ifstream infile(argv[1]);
 
-  getline(infile, line);
-  stringstream s2(line);
-  s2 >> numOfNodes >> numOfEdges;
+    getline(infile, line);
+    stringstream s1(line);
+    s1 >> directed;
 
-  vector<vector<int> > adjList; adjList.resize(numOfNodes);
-  vector<Node *> nodes; nodes.resize(numOfNodes);
+    getline(infile, line);
+    stringstream s2(line);
+    s2 >> numOfNodes >> numOfEdges;
 
-  vector<vector<int> > matrix; matrix.resize(numOfNodes);
+    vector<vector<int> > adjList; adjList.resize(numOfNodes);
+    vector<Node *> nodes; nodes.resize(numOfNodes);
 
-  for(int i=0; i<nodes.size(); i++){
-    nodes[i] = new Node();
-    matrix[i].resize(numOfNodes);
-  }
+    vector<vector<int> > matrix; matrix.resize(numOfNodes);
 
-  while(getline(infile, line)){
-    stringstream s3(line);
-    s3 >> firstNode >> secondNode;
+    for(int i=0; i<nodes.size(); i++){
+      nodes[i] = new Node();
+      matrix[i].resize(numOfNodes);
+    }
 
-    vector<int>::iterator indexFound;
+    while(getline(infile, line)){
+      stringstream s3(line);
+      s3 >> firstNode >> secondNode;
 
-    if(directed==1){
-      matrix[firstNode][secondNode] = 1;
+      vector<int>::iterator indexFound;
 
-      if(adjList[firstNode].size()==0){
-        adjList[firstNode].push_back(secondNode);
-      }else{
-        indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+      if(directed==1){
+        matrix[firstNode][secondNode] = 1;
 
-        if(indexFound==adjList[firstNode].end()){
+        if(adjList[firstNode].size()==0){
           adjList[firstNode].push_back(secondNode);
+        }else{
+          indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+
+          if(indexFound==adjList[firstNode].end()){
+            adjList[firstNode].push_back(secondNode);
+          }
         }
-      }
-    }else{
-      matrix[firstNode][secondNode] = 1;
-      matrix[secondNode][firstNode] = 1;
-
-      if(adjList[firstNode].size()==0){
-        adjList[firstNode].push_back(secondNode);
       }else{
-        indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+        matrix[firstNode][secondNode] = 1;
+        matrix[secondNode][firstNode] = 1;
 
-        if(indexFound==adjList[firstNode].end()){
+        if(adjList[firstNode].size()==0){
           adjList[firstNode].push_back(secondNode);
+        }else{
+          indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+
+          if(indexFound==adjList[firstNode].end()){
+            adjList[firstNode].push_back(secondNode);
+          }
         }
-      }
 
-      if(adjList[secondNode].size()==0){
-        adjList[secondNode].push_back(firstNode);
-      }else{
-        indexFound = find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
-
-        if(indexFound==adjList[secondNode].end()){
+        if(adjList[secondNode].size()==0){
           adjList[secondNode].push_back(firstNode);
+        }else{
+          indexFound = find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
+
+          if(indexFound==adjList[secondNode].end()){
+            adjList[secondNode].push_back(firstNode);
+          }
         }
       }
     }
-  }
 
-  /*for(int i=0; i<adjList.size(); i++){
-  cout << "Node: " << i << endl;
-  for(int j=0; j<adjList[i].size(); j++){
-  cout << adjList[i][j] << endl;
-}
+    /*for(int i=0; i<adjList.size(); i++){
+    cout << "Node: " << i << endl;
+    for(int j=0; j<adjList[i].size(); j++){
+    cout << adjList[i][j] << endl;
+  }
 }*/
 
 vector<pair<int,int>>BFSTree_List;
@@ -153,6 +157,7 @@ if(printBFSTree){
   }
 }
 
+runtimeList.push_back(chrono::duration_cast<chrono::microseconds>(end - start).count());
 cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
 
 cout << "---------------------------------------------" << endl;
@@ -187,9 +192,12 @@ if(printBFSTree){
   }
 
 }
+runtimeMatrix.push_back(chrono::duration_cast<chrono::microseconds>(end - start).count());
 
 cout << "Microseconds: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
 cout << "---------------------------------------------" << endl;
+}
+
 }
 
 vector<pair<int,int> > BFS_mat(vector<vector<int> > matrix, vector<Node*> nodes, int start){
