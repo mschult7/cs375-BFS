@@ -43,6 +43,10 @@ int main(int argc, char* argv[]){
   //}
 
   for(int tester=0;tester<100;tester++){
+    if(!printBFSTree){
+      cout << tester << "%" << endl;
+    }
+
     int directed = -1; //directed = 1, undirected = 0
     int numOfNodes = -1, numOfEdges = -1;
 
