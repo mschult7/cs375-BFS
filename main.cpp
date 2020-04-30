@@ -41,7 +41,10 @@ int main(int argc, char* argv[]){
   //
 
   //}
-
+  int printBFSTree = 1;
+  if(argv[2]!=NULL){
+    printBFSTree = stoi(argv[2]);
+  }
   for(int tester=0;tester<100;tester++){
     if(!printBFSTree){
       cout << tester << "%" << endl;
@@ -134,10 +137,7 @@ if(directed==0){
   BFSTree_List = BFS_list(adjList,nodes,0);
 }
 auto end = chrono::steady_clock::now();
-int printBFSTree = 1;
-if(argv[2]!=NULL){
-  printBFSTree = stoi(argv[2]);
-}
+
 
 
 if(printBFSTree){
