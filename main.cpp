@@ -2,6 +2,7 @@
 #include<fstream>
 #include<algorithm>
 #include<sstream>
+#include<numeric>
 #include<string>
 #include<vector>
 #include<queue>
