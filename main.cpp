@@ -49,7 +49,7 @@ int main(int argc, char* argv[]){
   if(argv[2]!=NULL){
     isDemoGraph = stoi(argv[2]);
   }
-  for(int tester=0;tester<100;tester++){
+  for(int tester=0;tester<1;tester++){
     if(!printBFSTree){
       cout << tester << "%" << endl;
     }
