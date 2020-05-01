@@ -42,8 +42,12 @@ int main(int argc, char* argv[]){
 
   //}
   int printBFSTree = 1;
+  if(argv[3]!=NULL){
+    printBFSTree = stoi(argv[3]);
+  }
+  int isDemoGraph = 0;
   if(argv[2]!=NULL){
-    printBFSTree = stoi(argv[2]);
+    isDemoGraph = stoi(argv[2]);
   }
   for(int tester=0;tester<100;tester++){
     if(!printBFSTree){
@@ -132,9 +136,9 @@ vector<pair<int,int>>BFSTree_Mat;
 
 auto start = chrono::steady_clock::now();
 if(directed==0){
-  BFSTree_List = BFS_list(adjList,nodes,0);
+  BFSTree_List = BFS_list(adjList,nodes,isDemoGraph);
 } else if(directed==1){
-  BFSTree_List = BFS_list(adjList,nodes,0);
+  BFSTree_List = BFS_list(adjList,nodes,isDemoGraph);
 }
 auto end = chrono::steady_clock::now();
 
@@ -168,9 +172,9 @@ runtimeList[tester] = (chrono::duration_cast<chrono::microseconds>(end - start).
 
 start = chrono::steady_clock::now();
 if(directed==0){
-  BFSTree_Mat = BFS_mat(matrix,nodes,0);
+  BFSTree_Mat = BFS_mat(matrix,nodes,isDemoGraph);
 } else if(directed==1){
-  BFSTree_Mat = BFS_mat(matrix,nodes,0);
+  BFSTree_Mat = BFS_mat(matrix,nodes,isDemoGraph);
 }
 end = chrono::steady_clock::now();
 
