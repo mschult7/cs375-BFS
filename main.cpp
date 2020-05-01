@@ -207,19 +207,29 @@ runtimeMatrix[tester] = (chrono::duration_cast<chrono::microseconds>(end - start
 
 
 }
+int listcount = 0;
 int nList = runtimeList.size();
 double averagel = 0.0;
 for(int i=0;i<nList;i++){
-  averagel += runtimeList[i];
+  if(runtimeList[i]!=0){
+    averagel += runtimeList[i];
+    listcount++;
+  }
+
 }
-averagel = averagel/nList;
+averagel = averagel/listcount;
 
 int nMat = runtimeMatrix.size();
+int ncount = 0;
 double averagem = 0.0;
 for(int i=0;i<nMat;i++){
-  averagem += runtimeMatrix[i];
+  if(runtimeMatrix[i]!=0){
+    averagem += runtimeMatrix[i];
+    ncount++;
+  }
+
 }
-averagem = averagem/nMat;
+averagem = averagem/ncount;
 
 
 cout << "average adjList: " << averagel << endl;
