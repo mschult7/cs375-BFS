@@ -8,264 +8,137 @@
 #include<queue>
 #include<chrono>
 
-class Node
-{
-	public:
-	    int index;
-	    int color;	//0 = white, 1 = grey, 2 = black
-	    int distance;
-	    Node * parent;
+using namespace std;
 
-	Node()
-	{
-		index = -1;
-		color = 0;
-		distance = -1;
-		parent = NULL;
-	}
+class Node{
+public:
+  int index;
+  int color; //0 = white, 1 = grey, 2 = black
+  int distance;
+  Node * parent;
+
+  Node(){
+    index = -1;
+    color = 0;
+    distance = -1;
+    parent = NULL;
+  }
 };
 
-vector<pair<int, int>> BFS_list(vector<vector<int> >, vector< Node*>, int);
-vector<pair<int, int>> BFS_mat(vector<vector<int> >, vector< Node*>, int);
+vector<pair<int,int> > BFS_list(vector<vector<int> >, vector<Node* >, int);
+vector<pair<int,int> > BFS_mat(vector<vector<int> >, vector<Node* >, int);
 
-int main(int argc, char *argv[])
-{
-	vector<int> runtimeList;
-	runtimeList.resize(100);
-	vector<int> runtimeMatrix;
-	runtimeMatrix.resize(100);
+int main(int argc, char* argv[]){
+  vector<int> runtimeList; runtimeList.resize(100);
+  vector<int> runtimeMatrix; runtimeMatrix.resize(100);
 
-	int printBFSTree = 1;
-	if (argv[3] != NULL)
-	{
-		printBFSTree = stoi(argv[3]);
-	}
-	int isDemoGraph = 0;
-	if (argv[2] != NULL)
-	{
-		isDemoGraph = stoi(argv[2]);
-	}
-	for (int tester = 0; tester < 1; tester++)
-	{
-		//CHANGE UPPERBOUND OF TESTER FOR MULTIPLE RUNS
-		if (!printBFSTree)
-		{
-			cout << tester << "%" << endl;
-		}
+  // int qez =0;
+  // for(int i=1;i<101;i++){
+  //   cout << qez << " " << i << endl;
+  //   if(i%2==0){
+  //     qez++;
+  //   }
+  //
 
-		int directed = -1;	//directed = 1, undirected = 0
-		int numOfNodes = -1, numOfEdges = -1;
+  //}
+  int printBFSTree = 1;
+  if(argv[3]!=NULL){
+    printBFSTree = stoi(argv[3]);
+  }
+  int isDemoGraph = 0;
+  if(argv[2]!=NULL){
+    isDemoGraph = stoi(argv[2]);
+  }
+  for(int tester=0;tester<1;tester++){
+    if(!printBFSTree){
+      cout << tester << "%" << endl;
+    }
 
-		int firstNode = -1, secondNode = -1;
-		string line;
+    int directed = -1; //directed = 1, undirected = 0
+    int numOfNodes = -1, numOfEdges = -1;
 
-		ifstream infile(argv[1]);
+    int firstNode = -1, secondNode = -1;
+    string line;
 
-		getline(infile, line);
-		stringstream s1(line);
-		s1 >> directed;
+    ifstream infile(argv[1]);
 
-		getline(infile, line);
-		stringstream s2(line);
-		s2 >> numOfNodes >> numOfEdges;
+    getline(infile, line);
+    stringstream s1(line);
+    s1 >> directed;
 
-		vector<vector < int>> adjList;
-		adjList.resize(numOfNodes);
-		vector<Node*> nodes;
-		nodes.resize(numOfNodes);
+    getline(infile, line);
+    stringstream s2(line);
+    s2 >> numOfNodes >> numOfEdges;
 
-		vector<vector < int>> matrix;
-		matrix.resize(numOfNodes);
+    vector<vector<int> > adjList; adjList.resize(numOfNodes);
+    vector<Node *> nodes; nodes.resize(numOfNodes);
 
-		for (int i = 0; i < nodes.size(); i++)
-		{
-			nodes[i] = new Node();
-			matrix[i].resize(numOfNodes);
-		}
+    vector<vector<int> > matrix; matrix.resize(numOfNodes);
 
-		while (getline(infile, line))
-		{
-			stringstream s3(line);
-			s3 >> firstNode >> secondNode;
+    for(int i=0; i<nodes.size(); i++){
+      nodes[i] = new Node();
+      matrix[i].resize(numOfNodes);
+    }
 
-			vector<int>::iterator indexFound;
+    while(getline(infile, line)){
+      stringstream s3(line);
+      s3 >> firstNode >> secondNode;
 
-			if (directed == 1)
-			{
-				matrix[firstNode][secondNode] = 1;
+      vector<int>::iterator indexFound;
 
-				if (adjList[firstNode].size() == 0)
-				{
-					adjList[firstNode].push_back(secondNode);
-				}
-				else
-				{
-					indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+      if(directed==1){
+        matrix[firstNode][secondNode] = 1;
 
-					if (indexFound == adjList[firstNode].end())
-					{
-						adjList[firstNode].push_back(secondNode);
-					}
-				}
-			}
-			else
-			{
-				matrix[firstNode][secondNode] = 1;
-				matrix[secondNode][firstNode] = 1;
+        if(adjList[firstNode].size()==0){
+          adjList[firstNode].push_back(secondNode);
+        }else{
+          indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
 
-				if (adjList[firstNode].size() == 0)
-				{
-					adjList[firstNode].push_back(secondNode);
-				}
-				else
-				{
-					indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
+          if(indexFound==adjList[firstNode].end()){
+            adjList[firstNode].push_back(secondNode);
+          }
+        }
+      }else{
+        matrix[firstNode][secondNode] = 1;
+        matrix[secondNode][firstNode] = 1;
 
-					if (indexFound == adjList[firstNode].end())
-					{
-						adjList[firstNode].push_back(secondNode);
-					}
-				}
+        if(adjList[firstNode].size()==0){
+          adjList[firstNode].push_back(secondNode);
+        }else{
+          indexFound = find(adjList[firstNode].begin(), adjList[firstNode].end(), secondNode);
 
-				if (adjList[secondNode].size() == 0)
-				{
-					adjList[secondNode].push_back(firstNode);
-				}
-				else
-				{
-					indexFound = find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
+          if(indexFound==adjList[firstNode].end()){
+            adjList[firstNode].push_back(secondNode);
+          }
+        }
 
-					if (indexFound == adjList[secondNode].end())
-					{
-						adjList[secondNode].push_back(firstNode);
-					}
-				}
-			}
-		}
+        if(adjList[secondNode].size()==0){
+          adjList[secondNode].push_back(firstNode);
+        }else{
+          indexFound = find(adjList[secondNode].begin(), adjList[secondNode].end(), firstNode);
 
-		vector<pair<int, int>> BFSTree_List;
-		vector<pair<int, int>> BFSTree_Mat;
+          if(indexFound==adjList[secondNode].end()){
+            adjList[secondNode].push_back(firstNode);
+          }
+        }
+      }
+    }
 
-		auto start = chrono::steady_clock::now();
-		if (directed == 0)
-		{
-			BFSTree_List = BFS_list(adjList, nodes, isDemoGraph);
-		}
-		else if (directed == 1)
-		{
-			BFSTree_List = BFS_list(adjList, nodes, isDemoGraph);
-		}
-		auto end = chrono::steady_clock::now();
+    /*for(int i=0; i<adjList.size(); i++){
+    cout << "Node: " << i << endl;
+    for(int j=0; j<adjList[i].size(); j++){
+    cout << adjList[i][j] << endl;
+  }
+}*/
 
-		if (printBFSTree)
-		{
-			cout << "--------- BFS with adjacency list ---------" << endl;
-			for (int i = 0; i < nodes.size(); i++)
-			{
-				cout << "Node: " << i << endl;
-				cout << "distance: " << nodes[i]->distance << endl;
-				if (nodes[i]->parent != NULL)
-				{
-					cout << "parent: " << nodes[i]->parent->index << endl;
-				}
-				else
-				{
-					cout << "parent: NULL	//This is the start Node" << endl;
-				}
+vector<pair<int,int>>BFSTree_List;
+vector<pair<int,int>>BFSTree_Mat;
 
-				cout << "edges: " << endl;
-				for (int j = 0; j < BFSTree_List.size(); j++)
-				{
-					if (BFSTree_List[j].first == i)
-					{
-						cout << BFSTree_List[j].second << endl;
-					}
-					else if (BFSTree_List[j].second == i && directed == 0)
-					{
-						cout << BFSTree_List[j].first << endl;
-					}
-				}
-			}
-			cout << "Microseconds: " <<chrono::duration_cast<chrono::microseconds > (end - start).count() << endl;
-		}
-
-		runtimeList[tester] = (chrono::duration_cast<chrono::microseconds > (end - start).count());
-
-		start = chrono::steady_clock::now();
-		if (directed == 0)
-		{
-			BFSTree_Mat = BFS_mat(matrix, nodes, isDemoGraph);
-		}
-		else if (directed == 1)
-		{
-			BFSTree_Mat = BFS_mat(matrix, nodes, isDemoGraph);
-		}
-		end = chrono::steady_clock::now();
-
-		if (printBFSTree)
-		{
-
-			cout << "---------------------------------------------" << endl;
-			cout << "--------- BFS with adjacency Matrix ---------" << endl;
-			for (int i = 0; i < nodes.size(); i++)
-			{
-				cout << "Node: " << i << endl;
-				cout << "distance: " << nodes[i]->distance << endl;
-				if (nodes[i]->parent != NULL)
-				{
-					cout << "parent: " << nodes[i]->parent->index << endl;
-				}
-				else
-				{
-					cout << "parent: NULL	//This is the start Node" << endl;
-				}
-
-				cout << "edges: " << endl;
-				for (int j = 0; j < BFSTree_Mat.size(); j++)
-				{
-					if (BFSTree_Mat[j].first == i)
-					{
-						cout << BFSTree_Mat[j].second << endl;
-					}
-					else if (BFSTree_Mat[j].second == i && directed == 0)
-					{
-						cout << BFSTree_Mat[j].first << endl;
-					}
-				}
-			}
-			cout << "Microseconds: " <<chrono::duration_cast<chrono::microseconds > (end - start).count() << endl;
-			cout << "---------------------------------------------" << endl;
-		}
-		runtimeMatrix[tester] = (chrono::duration_cast<chrono::microseconds > (end - start).count());
-	}
-	int listcount = 0;
-	int nList = runtimeList.size();
-	double averagel = 0.0;
-	for (int i = 0; i < nList; i++)
-	{
-		if (runtimeList[i] != 0)
-		{
-			averagel += runtimeList[i];
-			listcount++;
-		}
-	}
-	averagel = averagel / listcount;
-
-	int nMat = runtimeMatrix.size();
-	int ncount = 0;
-	double averagem = 0.0;
-	for (int i = 0; i < nMat; i++)
-	{
-		if (runtimeMatrix[i] != 0)
-		{
-			averagem += runtimeMatrix[i];
-			ncount++;
-		}
-	}
-	averagem = averagem / ncount;
-
-	cout << "average adjList: " << averagel << endl;
-	cout << "average adjMatrix: " << averagem << endl;
+auto start = chrono::steady_clock::now();
+if(directed==0){
+  BFSTree_List = BFS_list(adjList,nodes,isDemoGraph);
+} else if(directed==1){
+  BFSTree_List = BFS_list(adjList,nodes,isDemoGraph);
 }
 auto end = chrono::steady_clock::now();
 
@@ -334,19 +207,29 @@ runtimeMatrix[tester] = (chrono::duration_cast<chrono::microseconds>(end - start
 
 
 }
+int listcount = 0;
 int nList = runtimeList.size();
 double averagel = 0.0;
 for(int i=0;i<nList;i++){
-  averagel += runtimeList[i];
+  if(runtimeList[i]!=0){
+    averagel += runtimeList[i];
+    listcount++;
+  }
+
 }
-averagel = averagel/nList;
+averagel = averagel/listcount;
 
 int nMat = runtimeMatrix.size();
+int ncount = 0;
 double averagem = 0.0;
 for(int i=0;i<nMat;i++){
-  averagem += runtimeMatrix[i];
+  if(runtimeMatrix[i]!=0){
+    averagem += runtimeMatrix[i];
+    ncount++;
+  }
+
 }
-averagem = averagem/nMat;
+averagem = averagem/ncount;
 
 
 cout << "average adjList: " << averagel << endl;
