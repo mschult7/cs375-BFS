@@ -11,7 +11,7 @@
 class Node
 {
 	public:
-		int index;
+	    int index;
 	    int color;	//0 = white, 1 = grey, 2 = black
 	    int distance;
 	    Node * parent;
