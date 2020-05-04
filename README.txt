@@ -6,8 +6,8 @@ Group: Matthew Schultz
 Data Structures:
 	adjList: vector<vector<int> > - where each index represents a node and the vector at index represents the adj list of node at index
 	adjMatrix: vector<vector<int> > - where each index represents a node and the vector at index represents the adj list of node at index;
-					  -> NOTE: non-existing edges are included in this structure as a 0 in the adj list of the node at index
-	nodeList: vector<Node *> - list of the nodes with their corresponding index
+		-> NOTE: non-existing edges are included in this structure as a 0 in the adj list of the node at index
+	nodes: vector<Node *> - list of the nodes with their corresponding index
 
 	runtimeList: vector<int> - stores the runtime in microseconds for each iteration of the BFS search with the list
 	runtimeMatrix: vector<int> - stores the runtime microseconds for each iteration of the BFS search with the matrix
