@@ -7,7 +7,7 @@
 using namespace std;
 
 int main(int argc, char* argv[]){
-    int numOfNodes = 100, numOfEdges = 0;
+    int numOfNodes = 10, numOfEdges = 0;
 	
 	int firstNode = 0, secondNode = -1;
 	vector<vector<int> > adjList; adjList.resize(numOfNodes);
